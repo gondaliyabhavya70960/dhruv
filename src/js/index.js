@@ -1,204 +1,211 @@
-import LoconativeScroll from "loconative-scroll";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { copyText } from "./utils/index";
-import { mapEach } from "./utils/dom";
-// import Home from "./pages/home";
-import Time from "./components/Time";
+// ============================================================
+//  Dhruv Pawar — portfolio interactions
+//  Vanilla JS: preloader, nav, cursor, reveals, marquee-safe,
+//  copy-email, local time. No heavy scroll library needed.
+// ============================================================
 
-const toContactButtons = document.querySelectorAll(".contact-scroll");
-const footer = document.getElementById("js-footer");
-const scrollEl = document.querySelector("[data-scroll-container]");
-const emailButton = document.querySelector("button.email");
-const toCopyText = document.querySelector(".to-copy span");
-// const body = document.body;
-const time = new Time();
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
 
-gsap.registerPlugin(ScrollTrigger);
+// Mark JS as available so CSS can apply animation initial states.
+document.body.classList.add("js");
 
-const scroll = new LoconativeScroll({
-  el: scrollEl,
-  smooth: true,
-  lerp: 0.06,
-  tablet: {
-    breakpoint: 768,
-  },
-});
+// ---------- Preloader ----------
+const loader = document.querySelector(".loader");
 
-setTimeout(() => {
-  scroll.update();
-}, 1000);
+const finishLoading = () => {
+  loader?.classList.add("is-done");
+  playHeroIntro();
+};
 
-scroll.on("scroll", ScrollTrigger.update);
-
-ScrollTrigger.scrollerProxy(scroll.el, {
-  scrollTop(value) {
-    return arguments.length
-      ? scroll.scrollTo(value, 0, 0)
-      : scroll.scroll.instance.scroll.y;
-  },
-
-  getBoundingClientRect() {
-    return {
-      top: 0,
-      left: 0,
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  },
-});
-
-export default class Home {
-  constructor(scroll) {
-    this.locomotive = scroll;
-    this.heroTextAnimation();
-    this.homeIntro();
-    this.homeAnimations();
-    this.homeActions();
-  }
-
-  homeActions() {
-    mapEach(toContactButtons, (button) => {
-      button.onclick = () => {
-        this.locomotive.scrollTo(footer);
-      };
-    });
-
-    emailButton.addEventListener("click", (e) => {
-      copyText(e);
-      toCopyText.textContent = "copied";
-
-      setTimeout(() => {
-        toCopyText.textContent = "Click To Copy";
-      }, 2000);
-    });
-  }
-
-  homeIntro() {
-    const tl = gsap.timeline();
-
-    gsap.to(scrollEl, {
-      autoAlpha: 1,
-    });
-
-    tl.from(".home__nav", {
-      duration: 0.5,
-      delay: 0.3,
-      opacity: 0,
-      yPercent: -100,
-      ease: "power4.out",
-    })
-      .from(".hero__title [title-overflow]", {
-        duration: 0.7,
-        yPercent: 100,
-        stagger: {
-          amount: 0.2,
-        },
-        ease: "power4.out",
-      })
-      .from(
-        ".hero__title .bottom__right",
-        {
-          duration: 1,
-          yPercent: 100,
-          opacity: 0,
-          ease: "power4.out",
-        },
-        "<20%"
-      )
-      .set(".hero__title .overflow", { overflow: "unset" })
-      .from(
-        ".hero__title .mobile",
-        {
-          duration: 0.7,
-          yPercent: 100,
-          stagger: {
-            amount: 0.2,
-          },
-          ease: "power4.out",
-        },
-        "-=1.4"
-      );
-  }
-
-  homeAnimations() {
-    gsap.to(".home__projects__line", { autoAlpha: 1 });
-    gsap.utils.toArray(".home__projects__line").forEach((el) => {
-      const line = el.querySelector("span");
-      gsap.from(line, {
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: el,
-          scroller: "[data-scroll-container]",
-        },
-        scaleX: 0,
-      });
-    });
-
-    gsap.utils.toArray("[data-fade-in]").forEach((el) => {
-      gsap.from(el, {
-        scrollTrigger: {
-          trigger: el,
-          scroller: "[data-scroll-container]",
-        },
-        duration: 1.5,
-        yPercent: 100,
-        opacity: 0,
-        ease: "power4.out",
-      });
-    });
-
-    if (window.innerWidth <= 768) {
-      gsap.utils.toArray(".home__projects__project").forEach((el) => {
-        const text = el.querySelector(".title__main");
-        const link = el.querySelector(".project__link");
-        gsap.from([text, link], {
-          scrollTrigger: {
-            trigger: el,
-            scroller: "[data-scroll-container]",
-          },
-          duration: 1.5,
-          yPercent: 100,
-          stagger: {
-            amount: 0.2,
-          },
-          ease: "power4.out",
-        });
-      });
-
-      const awardsTl = gsap.timeline({
-        defaults: {
-          ease: "power1.out",
-        },
-        scrollTrigger: {
-          trigger: ".home__awards",
-          scroller: "[data-scroll-container]",
-        },
-      });
-      awardsTl.from(".awards__title span", {
-        duration: 1,
-        opacity: 0,
-        yPercent: 100,
-        stagger: {
-          amount: 0.2,
-        },
-      });
-    }
-  }
-
-  heroTextAnimation() {
-    gsap.to(".hero__title__dash.desktop", {
-      scrollTrigger: {
-        trigger: ".hero__title",
-        scroller: "[data-scroll-container]",
-        scrub: true,
-        start: "-8% 9%",
-        end: "110% 20%",
-      },
-      scaleX: 4,
-      ease: "none",
-    });
-  }
+if (prefersReducedMotion) {
+  finishLoading();
+} else {
+  // Let the loader bar play, then reveal.
+  window.addEventListener("load", () => setTimeout(finishLoading, 950), {
+    once: true,
+  });
+  // Safety net in case `load` hangs on a slow asset.
+  setTimeout(finishLoading, 3500);
 }
 
-new Home(scroll);
+// ---------- Hero intro ----------
+let heroPlayed = false;
+
+function playHeroIntro() {
+  if (heroPlayed) return;
+  heroPlayed = true;
+
+  document.querySelectorAll("[data-hero-line]").forEach((el, i) => {
+    setTimeout(() => el.classList.add("is-in"), 120 + i * 130);
+  });
+
+  document.querySelectorAll("[data-hero]").forEach((el, i) => {
+    setTimeout(() => el.classList.add("is-in"), 450 + i * 140);
+  });
+}
+
+// ---------- Sticky nav state ----------
+const nav = document.getElementById("js-nav");
+
+const onScrollNav = () => {
+  nav?.classList.toggle("is-scrolled", window.scrollY > 24);
+};
+
+onScrollNav();
+window.addEventListener("scroll", onScrollNav, { passive: true });
+
+// ---------- Mobile menu ----------
+const burger = document.getElementById("js-burger");
+const menu = document.getElementById("js-menu");
+
+const closeMenu = () => {
+  burger?.classList.remove("is-open");
+  menu?.classList.remove("is-open");
+  burger?.setAttribute("aria-expanded", "false");
+};
+
+burger?.addEventListener("click", () => {
+  const open = menu?.classList.toggle("is-open");
+  burger.classList.toggle("is-open", open);
+  burger.setAttribute("aria-expanded", String(Boolean(open)));
+  // Keyboard flow: the panel precedes the toggle in the DOM, so move
+  // focus into the menu when it opens.
+  if (open) menu?.querySelector("a")?.focus();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && menu?.classList.contains("is-open")) {
+    closeMenu();
+    burger?.focus();
+  }
+});
+
+menu?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", closeMenu);
+});
+
+// ---------- Scroll progress bar ----------
+const progress = document.getElementById("js-progress");
+
+const onScrollProgress = () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const ratio = max > 0 ? window.scrollY / max : 0;
+  if (progress) progress.style.transform = `scaleX(${ratio})`;
+};
+
+onScrollProgress();
+window.addEventListener("scroll", onScrollProgress, { passive: true });
+window.addEventListener("resize", onScrollProgress, { passive: true });
+
+// ---------- Reveal on scroll ----------
+const revealEls = document.querySelectorAll("[data-reveal]");
+
+if ("IntersectionObserver" in window && !prefersReducedMotion) {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  revealEls.forEach((el) => io.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add("is-visible"));
+}
+
+// ---------- Custom cursor (fine pointers only) ----------
+const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const dot = document.getElementById("js-cursor-dot");
+const ring = document.getElementById("js-cursor-ring");
+
+if (fine && dot && ring && !prefersReducedMotion) {
+  let mx = -100;
+  let my = -100;
+  let rx = -100;
+  let ry = -100;
+
+  window.addEventListener(
+    "mousemove",
+    (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.transform = `translate(${mx - 3}px, ${my - 3}px)`;
+    },
+    { passive: true }
+  );
+
+  const lerp = () => {
+    rx += (mx - rx) * 0.16;
+    ry += (my - ry) * 0.16;
+    ring.style.transform = `translate(${rx - 17}px, ${ry - 17}px)`;
+    requestAnimationFrame(lerp);
+  };
+  requestAnimationFrame(lerp);
+
+  document.querySelectorAll("a, button").forEach((el) => {
+    el.addEventListener("mouseenter", () => ring.classList.add("is-active"));
+    el.addEventListener("mouseleave", () => ring.classList.remove("is-active"));
+  });
+}
+
+// ---------- Project card pointer sheen ----------
+document.querySelectorAll(".project").forEach((card) => {
+  card.addEventListener(
+    "mousemove",
+    (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+    },
+    { passive: true }
+  );
+});
+
+// ---------- Copy email ----------
+const copyButton = document.getElementById("js-copy-email");
+const copyLabel = document.getElementById("js-copy-label");
+
+copyButton?.addEventListener("click", async () => {
+  const email = copyButton.dataset.email || "";
+  try {
+    await navigator.clipboard.writeText(email);
+  } catch {
+    // Clipboard API unavailable (e.g. insecure context) — fall back.
+    const input = document.createElement("input");
+    input.value = email;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    input.remove();
+  }
+
+  if (copyLabel) {
+    copyLabel.textContent = "Copied to clipboard!";
+    setTimeout(() => {
+      copyLabel.textContent = email;
+    }, 2000);
+  }
+});
+
+// ---------- Local time (IST) ----------
+const timeEl = document.getElementById("js-time");
+
+const renderTime = () => {
+  if (!timeEl) return;
+  timeEl.textContent = new Intl.DateTimeFormat("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "Asia/Kolkata",
+  }).format(new Date());
+};
+
+renderTime();
+setInterval(renderTime, 30_000);
