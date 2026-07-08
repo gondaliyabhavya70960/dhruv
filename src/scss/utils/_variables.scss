@@ -1,0 +1,24 @@
+$col-black: #111111;
+$col-white: #ffffff;
+$col-orange: #cb450c;
+$col-boulder: #777777;
+$col-gray: #aaaaaa;
+
+// Enhanced AI-themed accent colors
+$col-cyan: #00d4ff;
+$col-purple: #8b5cf6;
+$col-pink: #ec4899;
+$col-green: #10b981;
+
+// Gradient definitions
+$gradient-ai: linear-gradient(135deg, $col-cyan 0%, $col-purple 50%, $col-pink 100%);
+$gradient-name: linear-gradient(90deg, $col-cyan 0%, $col-purple 25%, $col-pink 50%, $col-purple 75%, $col-cyan 100%);
+$gradient-glow: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+
+$font-bebas: "Bebas Neue", sans-serif;
+$font-sauce: "Open Sauce", arial;
+$gradient: linear-gradient(
+  90deg,
+  rgba(233, 227, 198, 0.5) 0%,
+  rgba(233, 198, 217, 0.5) 100%
+);
