@@ -1,576 +1,604 @@
-<!DOCTYPE html><html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dhruv AI Engineer</title>
-  <meta name="title" content="Dhruv AI Engineer">
-  <link rel="icon" href="/favicon.ico">
-  <meta name="description" content="AI Engineer Focused on building advanced AI reasoning systems and enterprise LLM applications.">
-  <meta property="og:image" content="https://res.cloudinary.com/dmwfd0zhh/image/upload/v1625786788/Portfolio/Frame_5_lchlvc.jpg">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhruv Pawar — AI Engineer</title>
+  <meta name="title" content="Dhruv Pawar — AI Engineer" />
+  <meta name="description"
+    content="AI Engineer based in Pune, MH — building advanced AI reasoning systems and enterprise LLM applications." />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b5cf6'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0b12'/%3E%3Ctext x='32' y='44' font-family='Arial, sans-serif' font-size='36' font-weight='bold' fill='url(%23g)' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://linkedin.com/in/dhruv-pawar17" />
+  <meta property="og:title" content="Dhruv Pawar — AI Engineer" />
+  <meta property="og:description"
+    content="AI Engineer based in Pune, MH — building advanced AI reasoning systems and enterprise LLM applications." />
+  <meta property="og:image"
+    content="https://res.cloudinary.com/dmwfd0zhh/image/upload/v1625786788/Portfolio/Frame_5_lchlvc.jpg" />
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://linkedin.com/in/dhruv-pawar17">
-  <meta property="twitter:title" content="Dhruv AI Engineer">
-  <meta property="twitter:description" content="AI Engineer based in Pune, MH focused on building advanced AI reasoning systems and enterprise LLM applications.">
-  <meta property="twitter:image" content="https://res.cloudinary.com/dmwfd0zhh/image/upload/v1625786788/Portfolio/Frame_5_lchlvc.jpg">
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Dhruv Pawar — AI Engineer" />
+  <meta property="twitter:description"
+    content="AI Engineer based in Pune, MH — building advanced AI reasoning systems and enterprise LLM applications." />
+  <meta property="twitter:image"
+    content="https://res.cloudinary.com/dmwfd0zhh/image/upload/v1625786788/Portfolio/Frame_5_lchlvc.jpg" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://linkedin.com/in/dhruv-pawar17">
-  <meta property="og:title" content="Dhruv AI Engineer">
-  <meta property="og:description" content="AI Engineer based in Pune, MH focused on building advanced AI reasoning systems and enterprise LLM applications.">
-  <meta property="og:image" content="https://res.cloudinary.com/dmwfd0zhh/image/upload/v1625786788/Portfolio/Frame_5_lchlvc.jpg">
-  <script type="text/javascript" src="//w.24timezones.com/l.js" async=""></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
-  <link rel="preload" href="fonts/opensauce-medium.woff2" as="font" type="font/woff2" crossorigin="">
-
-  <link rel="stylesheet" href="scss/index.scss">
+  <link rel="stylesheet" href="scss/index.scss" />
+  <noscript>
+    <style>
+      .loader,
+      .progress,
+      .cursor {
+        display: none !important;
+      }
+    </style>
+  </noscript>
 </head>
 
 <body>
-  <main class="home" data-scroll-container="">
-    <nav class="home__nav glass-nav">
-      <div class="home__nav__left">
-        <div class="nav__name" nav-anim="">
-          <span>
-            DHRUV <br>
-            PAWAR</span>
-        </div>
-      </div>
+  <!-- Preloader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <span class="loader__name">DHRUV&nbsp;PAWAR</span>
+      <span class="loader__bar"><span></span></span>
+    </div>
+  </div>
 
-      <!-- Center Navigation Links -->
-      <div class="home__nav__center" nav-anim="">
-        <ul class="nav__menu">
-          <li><a href="#about" class="nav__menu-link">About</a></li>
-          <li><a href="#projects" class="nav__menu-link">Projects</a></li>
-          <li><a href="#skills" class="nav__menu-link">Skills</a></li>
-          <li><a href="resume/2026.pdf" target="_blank" rel="noopener noreferrer" class="nav__menu-link">Resume</a></li>
+  <!-- Scroll progress -->
+  <div class="progress" aria-hidden="true"><span id="js-progress"></span></div>
+
+  <!-- Custom cursor (desktop only) -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__dot" id="js-cursor-dot"></div>
+    <div class="cursor__ring" id="js-cursor-ring"></div>
+  </div>
+
+  <!-- Background decoration -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__aurora bg__aurora--1"></div>
+    <div class="bg__aurora bg__aurora--2"></div>
+    <div class="bg__aurora bg__aurora--3"></div>
+    <div class="bg__grid"></div>
+    <div class="bg__noise"></div>
+  </div>
+
+  <header class="nav" id="js-nav">
+    <div class="nav__inner">
+      <a href="#top" class="nav__logo" aria-label="Dhruv Pawar — back to top">
+        <span class="nav__logo-mark">DP</span>
+        <span class="nav__logo-text">DHRUV<br />PAWAR</span>
+      </a>
+
+      <nav class="nav__menu" id="js-menu" aria-label="Primary">
+        <ul>
+          <li><a href="#about" class="nav__link"><span data-index="01">About</span></a></li>
+          <li><a href="#projects" class="nav__link"><span data-index="02">Projects</span></a></li>
+          <li><a href="#experience" class="nav__link"><span data-index="03">Experience</span></a></li>
+          <li><a href="#skills" class="nav__link"><span data-index="04">Skills</span></a></li>
+          <li><a href="resume/2026.pdf" target="_blank" rel="noopener noreferrer" class="nav__link"><span
+                data-index="05">Resume</span></a></li>
+          <li class="nav__item--mobile"><a href="#contact" class="nav__link"><span
+                data-index="06">Contact</span></a></li>
         </ul>
+      </nav>
+
+      <div class="nav__right">
+        <span class="nav__status"><span class="pulse"></span>Pune, MH — India</span>
+        <a href="#contact" class="btn btn--primary nav__cta">Contact</a>
+        <button class="nav__burger" id="js-burger" aria-label="Toggle menu" aria-expanded="false"
+          aria-controls="js-menu">
+          <span></span><span></span>
+        </button>
       </div>
+    </div>
+  </header>
 
-      <div class="home__nav__right">
-        <div class="nav__availability" nav-anim=""></div>
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="js-hero">
+      <div class="hero__inner container">
+        <p class="hero__eyebrow" data-hero><span class="pulse"></span>AI Engineer based in Pune, MH</p>
 
-        <a href="#contact" class="nav__button c-button" nav-anim="">
-          <span class="c-link">
-            <span class="c-link__inner">
-              <span>Contact</span>
-              <span class="c-link__animated">Contact</span>
-            </span>
+        <h1 class="hero__title">
+          <span class="hero__line"><span class="hero__word" data-hero-line>DHRUV</span></span>
+          <span class="hero__line hero__line--indent">
+            <span class="hero__word hero__word--outline" data-hero-line>PAWAR</span>
           </span>
-        </a>
-      </div>
-    </nav>
-
-    <section class="home__hero">
-      <div class="hero__title">
-        <h1 class="mobile">
-          DHRUV <br>
-          —— AI <br>
-          ENGINEER
+          <span class="hero__line"><span class="hero__word hero__word--gradient" data-hero-line>AI&nbsp;ENGINEER</span></span>
         </h1>
-        <h1 class="hero__title__top overflow desktop">
-          <div class="hero__title__top" title-overflow="">
-            <span class="hero__title__left" data-scroll="" data-scroll-direction="horizontal" data-scroll-position="top" data-scroll-speed="7">
-              <span class="hero__hover">D</span>
-              <span class="hero__hover">H</span>
-              <span class="hero__hover">R</span>
-              <span class="hero__hover">U</span>
-              <span class="hero__hover">V</span>
-            </span>
-            <span class="hero__title__dash desktop">——</span>
-            <span class="hero__title__dash tablet">——</span>
 
-            <span class="hero__title__right" data-scroll="" data-scroll-direction="horizontal" data-scroll-position="top" data-scroll-speed="-7">
-              <span class="hero__hover">A</span>
-              <span class="hero__hover">I</span>
-            </span>
+        <div class="hero__bottom">
+          <p class="hero__desc" data-hero>
+            I design and build <strong>advanced AI reasoning systems</strong> and
+            enterprise-grade <strong>LLM applications</strong> — from research
+            prototypes to production microservices.
+          </p>
+
+          <div class="hero__actions" data-hero>
+            <a href="#projects" class="btn btn--primary">View projects
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+            <a href="#contact" class="btn btn--ghost">Get in touch</a>
           </div>
-        </h1>
+        </div>
 
-        <span class="hero__title__bottom overflow">
-          <div class="hero__title__bottom">
-            <h1 class="bottom__left desktop" title-overflow="">
-              <span class="hero__hover">A</span>
-              <span class="hero__hover">I</span>
-              <span class="hero__hover">&nbsp;</span>
-              <span class="hero__hover">E</span>
-              <span class="hero__hover">N</span>
-              <span class="hero__hover">G</span>
-              <span class="hero__hover">I</span>
-              <span class="hero__hover">N</span>
-              <span class="hero__hover">E</span>
-              <span class="hero__hover">E</span>
-              <span class="hero__hover">R</span>
-            </h1>
-            <div class="bottom__right">
-              <div class="hero__scroll">
-                <p>Scroll down</p>
-                <div class="c-infinite">
-                  <span class="c-link">
-                    <span class="c-link__inner">
-                      <span>
-                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.8333 13.9766L15.3033 9.50658L16.4816 10.6849L9.99998 17.1666L3.51831 10.6849L4.69664 9.50658L9.16664 13.9766V3.83325H10.8333V13.9766Z" fill="#777777"></path>
-                        </svg>
-                      </span>
-                      <span class="c-link__animated">
-                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.8333 13.9766L15.3033 9.50658L16.4816 10.6849L9.99998 17.1666L3.51831 10.6849L4.69664 9.50658L9.16664 13.9766V3.83325H10.8333V13.9766Z" fill="#777777"></path>
-                        </svg>
-                      </span>
-                    </span>
-                  </span>
+        <div class="hero__stats" data-hero>
+          <div class="stat">
+            <span class="stat__value">500+</span>
+            <span class="stat__label">Tokens / sec throughput</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">90%+</span>
+            <span class="stat__label">NLP-to-SQL accuracy</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">6</span>
+            <span class="stat__label">Reasoning methodologies</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">12+</span>
+            <span class="stat__label">Languages supported</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" class="hero__scroll" aria-label="Scroll to about section">
+        <span>Scroll</span>
+        <svg width="16" height="16" viewBox="0 0 20 21" fill="none" aria-hidden="true">
+          <path
+            d="M10.8333 13.9766L15.3033 9.50658L16.4816 10.6849L9.99998 17.1666L3.51831 10.6849L4.69664 9.50658L9.16664 13.9766V3.83325H10.8333V13.9766Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+    </section>
+
+    <!-- ============ TECH TICKER ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <div class="ticker__group">
+          <span>Python</span><i>◆</i><span>PyTorch</span><i>◆</i><span>TensorFlow</span><i>◆</i>
+          <span>LangChain</span><i>◆</i><span>Hugging Face</span><i>◆</i><span>LLMs</span><i>◆</i>
+          <span>RAG</span><i>◆</i><span>NLP</span><i>◆</i><span>FastAPI</span><i>◆</i>
+          <span>Docker</span><i>◆</i><span>AWS</span><i>◆</i><span>Vector Databases</span><i>◆</i>
+        </div>
+        <div class="ticker__group">
+          <span>Python</span><i>◆</i><span>PyTorch</span><i>◆</i><span>TensorFlow</span><i>◆</i>
+          <span>LangChain</span><i>◆</i><span>Hugging Face</span><i>◆</i><span>LLMs</span><i>◆</i>
+          <span>RAG</span><i>◆</i><span>NLP</span><i>◆</i><span>FastAPI</span><i>◆</i>
+          <span>Docker</span><i>◆</i><span>AWS</span><i>◆</i><span>Vector Databases</span><i>◆</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about section" id="about">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <span class="section__num">01</span>
+          <h2 class="section__title">About me</h2>
+        </div>
+
+        <div class="about__grid">
+          <p class="about__text" data-reveal>
+            I am an <strong>AI Engineer</strong> focused on building
+            <a href="https://github.com/DHRUV1817/-Advanced-AI-Reasoning-System-Pro" target="_blank"
+              rel="noopener noreferrer">advanced AI reasoning systems</a>
+            and enterprise LLM applications. I work with technologies like
+            <em>TensorFlow</em>, <em>PyTorch</em>, <em>LangChain</em> and
+            <em>Large Language Models</em> to ship high-performance AI solutions
+            with <strong>high throughput</strong> and <strong>high accuracy</strong>.
+          </p>
+
+          <aside class="about__card card" data-reveal>
+            <h3 class="about__card-title">Education</h3>
+            <p class="about__card-school"><strong>D.Y. Patil International University</strong>, Pune</p>
+            <p class="about__card-degree">B.Tech in CSE <em>(Honors in Data Science)</em></p>
+            <div class="about__card-meta">
+              <span>CGPA 8.0 / 10.0</span>
+              <span>2022 — 2026</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="projects section" id="projects">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <span class="section__num">02</span>
+          <h2 class="section__title">Featured projects</h2>
+          <span class="section__count">(05)</span>
+        </div>
+
+        <div class="projects__grid">
+          <!-- 01 — featured -->
+          <article class="project card card--featured" data-reveal>
+            <div class="project__top">
+              <span class="project__num">01</span>
+              <span class="project__tag">Architect / Microservices</span>
+            </div>
+            <h3 class="project__title">Advanced AI Reasoning System</h3>
+            <p class="project__subtitle">Enterprise LLM Application</p>
+            <p class="project__desc">
+              Production-grade AI platform implementing <strong>6 reasoning
+              methodologies</strong> (Tree of Thoughts, Chain of Thought,
+              Self-Consistency) with modular microservices achieving
+              <strong>500+ tokens/second</strong> throughput.
+            </p>
+            <ul class="project__tech">
+              <li>PyTorch</li>
+              <li>LangChain</li>
+              <li>FastAPI</li>
+              <li>Docker</li>
+            </ul>
+            <a href="https://github.com/DHRUV1817/-Advanced-AI-Reasoning-System-Pro" target="_blank"
+              rel="noopener noreferrer" class="project__link">
+              View on GitHub
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+          </article>
+
+          <!-- 02 -->
+          <article class="project card" data-reveal>
+            <div class="project__top">
+              <span class="project__num">02</span>
+              <span class="project__tag">NLP Agent / Data Visualization</span>
+            </div>
+            <h3 class="project__title">Neural Data Analyst</h3>
+            <p class="project__subtitle">AI-Powered BI Suite</p>
+            <p class="project__desc">
+              NLP-to-SQL agent translating natural language into optimized queries
+              with <strong>90%+ accuracy</strong>. Features an LLM benchmarking
+              framework evaluating <strong>6 models</strong> across latency,
+              accuracy and cost.
+            </p>
+            <ul class="project__tech">
+              <li>TensorFlow</li>
+              <li>Hugging Face</li>
+              <li>Streamlit</li>
+              <li>PostgreSQL</li>
+            </ul>
+            <a href="https://github.com/DHRUV1817/Neural-Data-Anlayst" target="_blank" rel="noopener noreferrer"
+              class="project__link">
+              View on GitHub
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+          </article>
+
+          <!-- 03 -->
+          <article class="project card" data-reveal>
+            <div class="project__top">
+              <span class="project__num">03</span>
+              <span class="project__tag">AI Engineer / Reinforcement Learning</span>
+            </div>
+            <h3 class="project__title">Adaptive Learning Chatbot</h3>
+            <p class="project__subtitle">Dev-Clash 24-Hour Hackathon</p>
+            <p class="project__desc">
+              Reinforcement learning-based chatbot that adapts to user learning
+              patterns and delivers personalized content, built and deployed in a
+              24-hour hackathon.
+            </p>
+            <ul class="project__tech">
+              <li>Python</li>
+              <li>RAG</li>
+              <li>Vector DB</li>
+              <li>Gradio</li>
+            </ul>
+            <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="project__link">
+              View on GitHub
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+          </article>
+
+          <!-- 04 -->
+          <article class="project card" data-reveal>
+            <div class="project__top">
+              <span class="project__num">04</span>
+              <span class="project__tag">NLP / Document Intelligence</span>
+            </div>
+            <h3 class="project__title">AI-Lawyer</h3>
+            <p class="project__subtitle">Document Processing System</p>
+            <p class="project__desc">
+              AI-powered document processing implementing advanced NLP —
+              <strong>Named Entity Recognition</strong>, <strong>Sentiment
+              Analysis</strong>, <strong>Key Phrase Extraction</strong> — with
+              multi-format support and <strong>95%+ accuracy</strong> on structured
+              documents.
+            </p>
+            <ul class="project__tech">
+              <li>TensorFlow</li>
+              <li>Hugging Face</li>
+              <li>Groq</li>
+            </ul>
+            <a href="https://github.com/DHRUV1817/AI-Lawyer" target="_blank" rel="noopener noreferrer"
+              class="project__link">
+              View on GitHub
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+          </article>
+
+          <!-- 05 -->
+          <article class="project card" data-reveal>
+            <div class="project__top">
+              <span class="project__num">05</span>
+              <span class="project__tag">Multi-source / Audio AI</span>
+            </div>
+            <h3 class="project__title">NewsNinja</h3>
+            <p class="project__subtitle">AI-Powered News Intelligence</p>
+            <p class="project__desc">
+              Production-ready news analysis with multi-source aggregation
+              (<strong>News API</strong>, <strong>Reddit</strong>, <strong>social
+              media</strong>), multilingual audio generation in <strong>12+
+              languages</strong> and <strong>3-second</strong> response times.
+            </p>
+            <ul class="project__tech">
+              <li>FastAPI</li>
+              <li>Streamlit</li>
+              <li>gTTS</li>
+              <li>Redis</li>
+            </ul>
+            <a href="https://github.com/DHRUV1817/NEWS-AI" target="_blank" rel="noopener noreferrer"
+              class="project__link">
+              View on GitHub
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+          </article>
+
+          <!-- More on GitHub -->
+          <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer"
+            class="project card card--more" data-reveal>
+            <span class="project__more-text">More on<br />GitHub</span>
+            <svg width="28" height="28" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z"
+                fill="currentColor" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="experience section" id="experience">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <span class="section__num">03</span>
+          <h2 class="section__title">Experience &amp; achievements</h2>
+        </div>
+
+        <div class="experience__grid">
+          <div class="experience__col" data-reveal>
+            <h3 class="experience__subtitle">Experience</h3>
+            <ol class="timeline">
+              <li class="timeline__item">
+                <span class="timeline__date">May '25 — Aug '25</span>
+                <h4 class="timeline__role">Open-Source AI/ML Contributor</h4>
+                <p class="timeline__org">Open-source community</p>
+              </li>
+              <li class="timeline__item">
+                <span class="timeline__date">May '24 — Aug '24</span>
+                <h4 class="timeline__role">Software Dev Intern</h4>
+                <p class="timeline__org">Stealth Startup</p>
+              </li>
+              <li class="timeline__item">
+                <span class="timeline__date">Apr '23 — May '23</span>
+                <h4 class="timeline__role">Community Ambassador</h4>
+                <p class="timeline__org">Pregrad</p>
+              </li>
+            </ol>
+          </div>
+
+          <div class="experience__col" data-reveal>
+            <h3 class="experience__subtitle">Achievements</h3>
+            <ul class="achievements">
+              <li class="achievements__item card">
+                <span class="achievements__icon" aria-hidden="true">🏆</span>
+                <div>
+                  <h4>Dev-Clash Hackathon</h4>
+                  <p>AI Chatbot — built &amp; deployed in 24 hours</p>
                 </div>
-              </div>
-            </div>
+              </li>
+              <li class="achievements__item card">
+                <span class="achievements__icon" aria-hidden="true">🎯</span>
+                <div>
+                  <h4>MaTPO Aptitude Idol 2025</h4>
+                  <p>Finalist — Top 0.14%</p>
+                </div>
+              </li>
+              <li class="achievements__item card">
+                <span class="achievements__icon" aria-hidden="true">🥇</span>
+                <div>
+                  <h4>NPTEL Big Data Computing</h4>
+                  <p>Gold Medal — Top 5%</p>
+                </div>
+              </li>
+            </ul>
           </div>
-        </span>
+        </div>
       </div>
     </section>
 
-    <!-- About Section - Below Hero -->
-    <section class="home__content" id="about">
-      <h2 class="home__content__title">ABOUT ME</h2>
-      <p class="home__content__desc">
-        I am an <strong>AI Engineer</strong> focused on building
-        <a href="https://github.com/DHRUV1817/-Advanced-AI-Reasoning-System-Pro" target="_blank" rel="noopener noreferrer">advanced AI reasoning systems</a>
-        and enterprise LLM applications. Working with technologies like
-        <span>TensorFlow,</span> <span>PyTorch,</span> <span>LangChain,</span>
-        and <span>Large Language Models</span> to achieve high-performance AI solutions
-        with <strong>high</strong> throughput and <strong>high accuracy</strong>.
-      </p>
+    <!-- ============ SKILLS ============ -->
+    <section class="skills section" id="skills">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <span class="section__num">04</span>
+          <h2 class="section__title">Technical skills</h2>
+        </div>
+
+        <div class="skills__grid">
+          <div class="skills__group card" data-reveal>
+            <h3>Languages</h3>
+            <ul class="chips">
+              <li>Python</li>
+              <li>Java</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+
+          <div class="skills__group card" data-reveal>
+            <h3>AI / ML</h3>
+            <ul class="chips">
+              <li>LLMs</li>
+              <li>NLP</li>
+              <li>RAG</li>
+              <li>Deep Learning</li>
+              <li>Prompt Engineering</li>
+              <li>Model Fine-Tuning</li>
+              <li>Inference Optimization</li>
+              <li>Vector Databases</li>
+            </ul>
+          </div>
+
+          <div class="skills__group card" data-reveal>
+            <h3>Frameworks</h3>
+            <ul class="chips">
+              <li>PyTorch</li>
+              <li>TensorFlow</li>
+              <li>LangChain</li>
+              <li>Hugging Face</li>
+              <li>Scikit-learn</li>
+              <li>FAISS</li>
+              <li>Pandas</li>
+              <li>NumPy</li>
+              <li>Streamlit</li>
+              <li>FastAPI</li>
+              <li>Gradio</li>
+            </ul>
+          </div>
+
+          <div class="skills__group card" data-reveal>
+            <h3>Cloud &amp; Tools</h3>
+            <ul class="chips">
+              <li>AWS S3</li>
+              <li>EC2</li>
+              <li>SageMaker</li>
+              <li>Lex</li>
+              <li>Comprehend</li>
+              <li>Docker</li>
+              <li>Git</li>
+              <li>MySQL</li>
+              <li>PostgreSQL</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="home__projects" id="projects" data-projects-section-1=""><span class="home__projects__line left"><span></span></span><div class="home__projects__project right">
-      
-    <div class="home__projects__project__label">
-      <div class="label__inner label-1">
-         <p>FEATURED <br> PROJECTS (3)</p>
-         <p>Architect / <br> Microservices</p>
-       </div>
-    </div>
-      
-    <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="home__projects__project__link">
-      <h1 class="home__projects__project__title" data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="8">
-        <span class="inline-ovh">
-          <div class="title__main right">
-            <span class="slide-up" data-content="Advanced AI Reasoning System — Enterprise LLM Application" aria-hidden="true"></span>
-            Advanced AI Reasoning System — Enterprise LLM Application
-          </div>
-        </span>
-      </h1>
-    </a>
-      
-    <div class="project__link">
-      <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="c-button">
-        <span class="c-link">
-          <span class="c-link__inner">
-            <span>
-              Visit Site
-              <span class="share-icon">
-                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z" fill="#777"></path>
-                </svg>
-              </span>
-            </span>
-          </span>
-        </span>
+    <!-- ============ CONTACT ============ -->
+    <section class="contact section" id="contact">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <span class="section__num">05</span>
+          <h2 class="section__title">Get in touch</h2>
+        </div>
+
+        <p class="contact__desc" data-reveal>
+          Got a question, proposal or project — or want to work together on
+          something? Feel free to reach out.
+        </p>
+      </div>
+
+      <a class="contact__marquee"
+        href="mailto:dupawar2004@gmail.com?subject=Let's%20work%20together!"
+        aria-label="Email Dhruv Pawar">
+        <div class="contact__marquee-track" aria-hidden="true">
+          <span>Let’s talk — Let’s collaborate — Say hello — Wanna be starting something?&nbsp;—&nbsp;</span>
+          <span>Let’s talk — Let’s collaborate — Say hello — Wanna be starting something?&nbsp;—&nbsp;</span>
+        </div>
       </a>
-    </div>
-    </div><span class="home__projects__line right"><span></span></span><div class="home__projects__project left">
-      
-    <div class="home__projects__project__label">
-      <div class="label__inner">
-         <p>NLP Agent / <br> Data Visualization</p>
-       </div>
-    </div>
-      
-    <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="home__projects__project__link">
-      <h1 class="home__projects__project__title" data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="-8">
-        <span class="inline-ovh">
-          <div class="title__main left">
-            <span class="slide-up" data-content="Neural Data Analyst — AI-Powered BI Suite" aria-hidden="true"></span>
-            Neural Data Analyst — AI-Powered BI Suite
-          </div>
-        </span>
-      </h1>
-    </a>
-      
-    <div class="project__link">
-      <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="c-button">
-        <span class="c-link">
-          <span class="c-link__inner">
-            <span>
-              Visit Site
-              <span class="share-icon">
-                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z" fill="#777"></path>
-                </svg>
-              </span>
-            </span>
-          </span>
-        </span>
-      </a>
-    </div>
-    </div><span class="home__projects__line left"><span></span></span><div class="home__projects__project right">
-      
-    <div class="home__projects__project__label">
-      <div class="label__inner">
-         <p>AI Engineer / <br> Reinforcement Learning</p>
-       </div>
-    </div>
-      
-    <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="home__projects__project__link">
-      <h1 class="home__projects__project__title" data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="8">
-        <span class="inline-ovh">
-          <div class="title__main right">
-            <span class="slide-up" data-content="Dev-Clash Hackathon — Adaptive Learning Chatbot" aria-hidden="true"></span>
-            Dev-Clash Hackathon — Adaptive Learning Chatbot
-          </div>
-        </span>
-      </h1>
-    </a>
-      
-    <div class="project__link">
-      <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="c-button">
-        <span class="c-link">
-          <span class="c-link__inner">
-            <span>
-              Visit Site
-              <span class="share-icon">
-                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.337 7.845l-7.173 7.173-1.178-1.179 7.172-7.172H5.837V5h9.166v9.167h-1.666V7.845z" fill="#777"></path>
-                </svg>
-              </span>
-            </span>
-          </span>
-        </span>
-      </a>
-    </div>
-    </div><span class="home__projects__line right"><span></span></span></section>
 
-    <!-- Project Cards Section -->
-    <section class="home__project-cards" id="project-cards">
-      <h2 class="home__content__title">PROJECT DETAILS</h2>
-
-      <div class="project-cards-grid">
-        <!-- Project Card 1 -->
-        <div class="project-card glass-card">
-          <div class="project-card__header">
-            <span class="project-card__number">01</span>
-            <h3 class="project-card__title">Advanced AI Reasoning System</h3>
-          </div>
-          <p class="project-card__desc">
-            Production-grade AI platform implementing <strong>6 reasoning methodologies</strong>
-            (Tree of Thoughts, Chain of Thought, Self-Consistency) with modular microservices
-            achieving <strong>500+ tokens/second</strong> throughput.
-          </p>
-          <div class="project-card__tech">
-            <span>PyTorch</span>
-            <span>LangChain</span>
-            <span>FastAPI</span>
-            <span>Docker</span>
-          </div>
-          <a href="https://github.com/DHRUV1817/-Advanced-AI-Reasoning-System-Pro" target="_blank" rel="noopener noreferrer" class="project-card__link">
-            View on GitHub →
-          </a>
+      <div class="container">
+        <div class="contact__actions" data-reveal>
+          <button class="contact__email btn btn--primary" id="js-copy-email" type="button"
+            data-email="dupawar2004@gmail.com">
+            <span id="js-copy-label" role="status" aria-live="polite">dupawar2004@gmail.com</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M8 7V5a2 2 0 012-2h9a2 2 0 012 2v9a2 2 0 01-2 2h-2M5 9h9a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2v-9a2 2 0 012-2z"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <span class="contact__hint">Click to copy</span>
         </div>
 
-        <!-- Project Card 2 -->
-        <div class="project-card glass-card">
-          <div class="project-card__header">
-            <span class="project-card__number">02</span>
-            <h3 class="project-card__title">Neural Data Analyst</h3>
-          </div>
-          <p class="project-card__desc">
-            NLP-to-SQL agent translating natural language into optimized queries with
-            <strong>90%+ accuracy</strong>. Features LLM benchmarking framework evaluating
-            <strong>6 models</strong> across latency, accuracy, and cost metrics.
-          </p>
-          <div class="project-card__tech">
-            <span>TensorFlow</span>
-            <span>Hugging Face</span>
-            <span>Streamlit</span>
-            <span>PostgreSQL</span>
-          </div>
-          <a href="https://github.com/DHRUV1817/Neural-Data-Anlayst" target="_blank" rel="noopener noreferrer" class="project-card__link">
-            View on GitHub →
+        <div class="contact__socials" data-reveal>
+          <a href="https://linkedin.com/in/dhruv-pawar17" target="_blank" rel="noopener noreferrer"
+            class="btn btn--ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+              aria-hidden="true">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+            LinkedIn
           </a>
-        </div>
-
-        <!-- Project Card 3 -->
-        <div class="project-card glass-card">
-          <div class="project-card__header">
-            <span class="project-card__number">03</span>
-            <h3 class="project-card__title">Adaptive Learning Chatbot</h3>
-          </div>
-          <p class="project-card__desc">
-            Dev-Clash 24-Hour Hackathon project featuring reinforcement learning-based
-            chatbot that adapts to user learning patterns with personalized content delivery.
-          </p>
-          <div class="project-card__tech">
-            <span>Python</span>
-            <span>RAG</span>
-            <span>Vector DB</span>
-            <span>Gradio</span>
-          </div>
-          <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="project-card__link">
-            View on GitHub →
+          <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+              aria-hidden="true">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            GitHub
           </a>
-        </div>
-
-        <!-- Project Card 4 -->
-        <div class="project-card glass-card">
-          <div class="project-card__header">
-            <span class="project-card__number">04</span>
-            <h3 class="project-card__title">AI-Lawyer</h3>
-          </div>
-          <p class="project-card__desc">
-            AI-powered document processing system implementing advanced NLP techniques
-            (<strong>Named Entity Recognition</strong>, <strong>Sentiment Analysis</strong>,
-            <strong>Key Phrase Extraction</strong>) with multi-format support achieving
-            <strong>95%+ accuracy</strong> on structured documents.
-          </p>
-          <div class="project-card__tech">
-            <span>TensorFlow</span>
-            <span>Hugging Face</span>
-            <span>Groq</span>
-          </div>
-          <a href="https://github.com/DHRUV1817/AI-Lawyer" target="_blank" rel="noopener noreferrer" class="project-card__link">
-            View on GitHub →
+          <a href="mailto:dupawar2004@gmail.com" class="btn btn--ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+              aria-hidden="true">
+              <path
+                d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z" />
+            </svg>
+            Email
           </a>
-        </div>
-
-        <!-- Project Card 5 -->
-        <div class="project-card glass-card">
-          <div class="project-card__header">
-            <span class="project-card__number">05</span>
-            <h3 class="project-card__title">NewsNinja: AI-Powered News Intelligence</h3>
-          </div>
-          <p class="project-card__desc">
-            Production-ready news analysis system implementing multi-source aggregation
-            (<strong>News API</strong>, <strong>Reddit</strong>, <strong>Social Media</strong>) with
-            multilingual audio generation supporting <strong>12+ languages</strong> and achieving
-            <strong>3-second response times</strong>.
-          </p>
-          <div class="project-card__tech">
-            <span>FastAPI</span>
-            <span>Streamlit</span>
-            <span>gTTS</span>
-            <span>Redis</span>
-          </div>
-          <a href="https://github.com/DHRUV1817/NEWS-AI" target="_blank" rel="noopener noreferrer" class="project-card__link">
-            View on GitHub →
+          <a href="resume/2026.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              aria-hidden="true">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+            </svg>
+            Resume
           </a>
         </div>
       </div>
     </section>
-
-    <section class="home__projects" data-projects-section-2=""><span class="home__projects__line left"><span></span></span></section>
-
-    <section class="home__awards" id="skills">
-      <div class="home__awards__left">
-        <h2 class="awards__title">
-          <span>EXPERIENCE &amp; </span><br>
-          <span>ACHIEVEMENTS</span>
-        </h2>
-        <div class="home__awards__table">
-          <div class="awards__item" data-fade-in="">
-            Open-Source AI/ML Contributor ⏤ May '25 - Aug '25
-          </div>
-          <div class="awards__item" data-fade-in="">
-            Software Dev Intern @ Stealth Startup ⏤ May '24 - Aug '24
-          </div>
-          <div class="awards__item" data-fade-in="">
-            Community Ambassador @ Pregrad ⏤ Apr '23 - May '23
-          </div>
-          <div class="awards__item" data-fade-in="">
-            &nbsp;
-          </div>
-          <div class="awards__item" data-fade-in="">
-            <strong>ACHIEVEMENTS</strong>
-          </div>
-          <div class="awards__item" data-fade-in="">
-            Dev-Clash Hackathon ⏤ AI Chatbot
-          </div>
-          <div class="awards__item" data-fade-in="">
-            MaTPO Aptitude Idol 2025 ⏤ Finalist (Top 0.14%)
-          </div>
-          <div class="awards__item" data-fade-in="">
-            NPTEL Big Data Computing ⏤ Gold Medal (Top 5%)
-          </div>
-        </div>
-      </div>
-
-      <div class="home__awards__right">
-        <div class="home__awards__stack" data-fade-in="">
-          <h2 class="home__content__title">Technical Skills</h2>
-          <p class="home__content__desc">
-            <strong>Languages:</strong> Python, Java, SQL <br>
-            <strong>AI/ML:</strong> LLMs, NLP, RAG, Deep Learning, Prompt Engineering, Model Fine-Tuning, Inference
-            Optimization, Vector Databases <br>
-            <strong>Frameworks:</strong> PyTorch, TensorFlow, LangChain, Hugging Face, Scikit-learn, FAISS, Pandas,
-            NumPy, Streamlit, FastAPI, Gradio <br>
-            <strong>Cloud &amp; Tools:</strong> AWS (S3, EC2, SageMaker, Lex, Comprehend), Docker, Git, MySQL,
-            PostgreSQL
-            <br>
-            <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer">See my Github</a>
-          </p>
-        </div>
-
-        <div class="home__awards__ice" data-fade-in="">
-          <h2 class="home__content__title">EDUCATION</h2>
-          <p class="home__content__desc">
-            <strong>D.Y. Patil International University</strong>, Pune <br>
-            B.Tech in CSE <em>(Honors in Data Science)</em> <br>
-            CGPA: 8.0/10.0 <br>
-            2022 – 2026
-            <br><br>
-            <button class="contact-scroll">GET IN TOUCH</button>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="home__contact" id="contact">
-      <p class="home__contact__desc">
-        Got a question, proposal or project or want to work together on
-        something? Feel free to reach out.
-      </p>
-      <div class="line-wrapper">
-        <span class="home__projects__line left">
-          <span></span>
-        </span>
-      </div>
-
-      <div class="marquee">
-        <a href="mailto:dupawar2004@gmail.com?subject=Lets%20work%20together!&amp;body=Hello%2C%20I%20think%20we%20need%20you%20to%20work%20on%2Fcollaborate%20this%20particular%20product...%20Reach%20out%20as%20soon%20as%20you%20can." class="marquee__wrap">
-          <div class="marquee__inner">
-            <span aria-hidden="true" class="inner-span">
-              <span class="slide-up" data-content="LET’S TALK — LET’S COLLABORATE — SAY HELLO — WANNA BE STARTING
-                SOMETHING?" aria-hidden="true"></span>
-              LET’S TALK — LET’S COLLABORATE — SAY HELLO — WANNA BE STARTING
-              SOMETHING?</span>
-            <span class="inner-span">
-              <span class="slide-up" data-content="LET’S TALK — LET’S COLLABORATE — SAY HELLO — WANNA BE STARTING
-                SOMETHING?" aria-hidden="true"></span>
-              LET’S TALK — LET’S COLLABORATE — SAY HELLO — WANNA BE STARTING
-              SOMETHING?</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="line-wrapper">
-        <span class="home__projects__line right">
-          <span></span>
-        </span>
-      </div>
-
-      <div class="home__contact__email">
-        <button class="email">dupawar2004@gmail.com</button>
-        <div class="to-copy">
-          <span>Click To Copy</span>
-        </div>
-      </div>
-    </section>
-
-    <footer class="home__footer" id="js-footer">
-      <div class="home__footer__center">
-        <div class="footer__links">
-          <div class="link__flex">
-            <div class="link__flex__inner">
-              <a href="https://linkedin.com/in/dhruv-pawar17" target="_blank" rel="noopener noreferrer" class="c-button social-link">
-                <span class="c-link">
-                  <span class="c-link__inner">
-                    <span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
-                        </path>
-                      </svg>
-                      LINKEDIN
-                    </span>
-                    <span class="c-link__animated">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
-                        </path>
-                      </svg>
-                      LINKEDIN
-                    </span>
-                  </span>
-                </span>
-              </a>
-
-              <a href="mailto:dupawar2004@gmail.com" target="_blank" rel="noopener noreferrer" class="c-button social-link">
-                <span class="c-link">
-                  <span class="c-link__inner">
-                    <span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z">
-                        </path>
-                      </svg>
-                      EMAIL
-                    </span>
-                    <span class="c-link__animated">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z">
-                        </path>
-                      </svg>
-                      EMAIL
-                    </span>
-                  </span>
-                </span>
-              </a>
-
-              <a href="https://github.com/DHRUV1817" target="_blank" rel="noopener noreferrer" class="c-button social-link">
-                <span class="c-link">
-                  <span class="c-link__inner">
-                    <span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z">
-                        </path>
-                      </svg>
-                      GITHUB
-                    </span>
-                    <span class="c-link__animated">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z">
-                        </path>
-                      </svg>
-                      GITHUB
-                    </span>
-                  </span>
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="home__footer__left">
-        <p class="place"></p>
-      </div>
-
-    </footer>
   </main>
 
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">© 2026 Dhruv Pawar</p>
+      <p class="footer__time">Pune, IN — <span id="js-time">--:--</span> IST</p>
+      <a href="#top" class="footer__top">Back to top ↑</a>
+    </div>
+  </footer>
+
   <script src="js/index.js" type="module"></script>
+</body>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body></html>
+</html>

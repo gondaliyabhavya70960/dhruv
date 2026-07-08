@@ -1,26 +1,19 @@
 {
-  "name": "profile-rebuild",
+  "name": "dhruv-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "predev": "node scripts/predev.js",
     "dev": "vite src --port 3000",
-    "prebuild": "node scripts/predev.js",
     "build": "vite build src",
-    "preview": "vite preview",
+    "preview": "vite preview src",
     "deploy": "npm run build && gh-pages -d dist"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dhruv Pawar",
   "devDependencies": {
-    "cheerio": "^1.1.0",
     "gh-pages": "^6.3.0",
     "sass": "^1.62.0",
     "vite": "^5.2.9"
-  },
-  "dependencies": {
-    "gsap": "^3.7.0",
-    "loconative-scroll": "https://github.com/quentinhocde/loconative-scroll"
   }
 }

@@ -1,6 +1,8 @@
 export default {
   root: "src",
-  base: "/new-portfolio/",
+  // Relative base so the build works on GitHub Pages (any repo path)
+  // or any other static host without configuration.
+  base: "./",
   build: {
     outDir: "../dist",
     emptyOutDir: true,
