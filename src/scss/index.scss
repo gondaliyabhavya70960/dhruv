@@ -107,6 +107,20 @@ html {
   color: transparent;
 }
 
+// Lenis smooth-scroll integration (classes set by the library)
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 .container {
   width: min(1160px, 100% - 48px);
   margin-inline: auto;
@@ -431,6 +445,9 @@ html {
   filter: blur(90px);
   opacity: 0.16;
   animation: drift 26s ease-in-out infinite alternate;
+  // scroll parallax rides on the independent `translate` property so it
+  // composes with the drift keyframes' transform (GSAP drives --par-y)
+  translate: 0 var(--par-y, 0px);
 
   &--1 {
     top: -22%;
@@ -726,6 +743,17 @@ html {
   &--indent {
     padding-left: clamp(30px, 8vw, 140px);
   }
+}
+
+// Per-letter spans injected by JS for the hover bounce
+.hero__char {
+  display: inline-block;
+}
+
+// After the intro line-mask animation, unclip so letter hovers can
+// bounce past the line box (JS adds .is-done)
+.hero__title.is-done .hero__line {
+  overflow: visible;
 }
 
 .hero__word {
@@ -1403,6 +1431,11 @@ html {
   display: flex;
   width: max-content;
   animation: ticker 24s linear infinite;
+
+  // GSAP takes over the movement when the animation layer is active
+  &.is-gsap {
+    animation: none;
+  }
 
   span {
     font-family: var(--font-display);
