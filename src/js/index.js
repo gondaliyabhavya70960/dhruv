@@ -1,8 +1,15 @@
 // ============================================================
 //  Dhruv Pawar — portfolio interactions
-//  Vanilla JS: preloader, nav, cursor, reveals, marquee-safe,
-//  copy-email, local time. No heavy scroll library needed.
+//  Vanilla JS for the basics (preloader, nav, reveals, copy-email,
+//  local time) plus a GSAP + ScrollTrigger + Lenis animation layer:
+//  smooth scrolling, hero parallax, letter hover, velocity marquee.
 // ============================================================
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const prefersReducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
@@ -48,6 +55,13 @@ function playHeroIntro() {
   // Start the stat counters only once the stats are actually fading in —
   // earlier and the animation plays invisibly behind the preloader.
   setTimeout(initStatCounters, 900);
+
+  // Once the line-mask intro has finished, unclip the hero lines so the
+  // per-letter hover bounce isn't cut off (same trick the original site
+  // used: release the overflow after the intro).
+  setTimeout(() => {
+    document.querySelector(".hero__title")?.classList.add("is-done");
+  }, 1700);
 }
 
 // ---------- Sticky nav state ----------
@@ -338,3 +352,157 @@ const renderTime = () => {
 
 renderTime();
 setInterval(renderTime, 30_000);
+
+// ============================================================
+//  GSAP + Lenis animation layer (skipped under reduced motion —
+//  the CSS/IO fallbacks above keep the site fully usable)
+// ============================================================
+if (!prefersReducedMotion) {
+  // ---------- Smooth scrolling ----------
+  const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  // Route anchor navigation through Lenis so it stays smooth. No extra
+  // offset: Lenis already honors the CSS scroll-padding-top. Native
+  // semantics are preserved: modified clicks pass through, the URL hash
+  // still updates, and focus moves to the target section.
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
+        return;
+      }
+      const target = a.getAttribute("href");
+      const section = target.length > 1 && document.querySelector(target);
+      if (!section) return;
+      e.preventDefault();
+      history.pushState(null, "", target);
+      lenis.scrollTo(section, {
+        duration: 1.2,
+        onComplete: () => {
+          if (!section.hasAttribute("tabindex")) {
+            section.setAttribute("tabindex", "-1");
+          }
+          section.focus({ preventScroll: true });
+        },
+      });
+    });
+  });
+
+  // ---------- Hero title: horizontal parallax on scroll ----------
+  const heroLines = document.querySelectorAll(".hero__title .hero__line");
+  if (heroLines.length === 3) {
+    const speeds = [7, -9, 5];
+    heroLines.forEach((line, i) => {
+      gsap.to(line, {
+        xPercent: speeds[i],
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    });
+  }
+
+  // ---------- Hero name: per-letter hover bounce ----------
+  // Splitting into spans would make screen readers announce the h1
+  // letter-by-letter, so give the heading a single accessible name first.
+  const heroTitle = document.querySelector(".hero__title");
+  if (heroTitle) {
+    heroTitle.setAttribute(
+      "aria-label",
+      heroTitle.textContent.replace(/\s+/g, " ").trim()
+    );
+  }
+
+  document
+    .querySelectorAll(".hero__title .hero__line:nth-child(-n+2) .hero__word")
+    .forEach((word) => {
+      const text = word.textContent;
+      word.textContent = "";
+      [...text].forEach((ch) => {
+        const span = document.createElement("span");
+        span.className = "hero__char";
+        span.textContent = ch;
+        word.appendChild(span);
+      });
+    });
+
+  document.querySelectorAll(".hero__char").forEach((char) => {
+    char.addEventListener("mouseenter", () => {
+      if (gsap.isTweening(char)) return;
+      gsap.to(char, {
+        yPercent: -16,
+        duration: 0.18,
+        ease: "power2.out",
+        yoyo: true,
+        repeat: 1,
+        onComplete: () => gsap.set(char, { yPercent: 0 }),
+      });
+    });
+  });
+
+  // ---------- Aurora blobs: vertical parallax ----------
+  // The blobs' own drift is a CSS transform animation, so the parallax
+  // rides on the independent `translate` property (see SCSS) instead.
+  [
+    [".bg__aurora--1", "140px"],
+    [".bg__aurora--2", "-110px"],
+    [".bg__aurora--3", "90px"],
+  ].forEach(([sel, y]) => {
+    gsap.to(sel, {
+      "--par-y": y,
+      ease: "none",
+      scrollTrigger: { start: 0, end: "max", scrub: 1.2 },
+    });
+  });
+
+  // ---------- Section titles: subtle horizontal drift in ----------
+  document.querySelectorAll(".section__title").forEach((title) => {
+    gsap.fromTo(
+      title,
+      { xPercent: -3 },
+      {
+        xPercent: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: title,
+          start: "top 95%",
+          end: "top 45%",
+          scrub: true,
+        },
+      }
+    );
+  });
+
+  // ---------- Contact marquee: scroll-velocity reactive ----------
+  const marqueeTrack = document.querySelector(".contact__marquee-track");
+  const marqueeWrap = document.querySelector(".contact__marquee");
+  if (marqueeTrack && marqueeWrap) {
+    marqueeTrack.classList.add("is-gsap"); // disables the CSS fallback animation
+    const marqueeTween = gsap.to(marqueeTrack, {
+      xPercent: -50,
+      ease: "none",
+      duration: 24,
+      repeat: -1,
+    });
+
+    lenis.on("scroll", (e) => {
+      const boost = Math.min(Math.abs(e.velocity) / 10, 2.5);
+      marqueeTween.timeScale(marqueeWrap.matches(":hover") ? 0 : 1 + boost);
+      gsap.to(marqueeTrack, {
+        skewX: gsap.utils.clamp(-5, 5, e.velocity * -0.12),
+        duration: 0.4,
+        overwrite: "auto",
+      });
+    });
+
+    // Preserve the pause-on-hover behavior the CSS version had.
+    marqueeWrap.addEventListener("mouseenter", () => marqueeTween.timeScale(0));
+    marqueeWrap.addEventListener("mouseleave", () => marqueeTween.timeScale(1));
+  }
+}
