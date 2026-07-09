@@ -44,6 +44,10 @@ function playHeroIntro() {
   document.querySelectorAll("[data-hero]").forEach((el, i) => {
     setTimeout(() => el.classList.add("is-in"), 450 + i * 140);
   });
+
+  // Start the stat counters only once the stats are actually fading in —
+  // earlier and the animation plays invisibly behind the preloader.
+  setTimeout(initStatCounters, 900);
 }
 
 // ---------- Sticky nav state ----------
@@ -193,6 +197,131 @@ copyButton?.addEventListener("click", async () => {
     }, 2000);
   }
 });
+
+// ---------- Count-up hero stats (started from playHeroIntro) ----------
+const runCountUp = (el) => {
+  const target = parseInt(el.dataset.count, 10);
+  const suffix = el.dataset.suffix || "";
+  const duration = 1300;
+  let start;
+
+  const tick = (ts) => {
+    if (start === undefined) start = ts;
+    const p = Math.min((ts - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = `${Math.round(target * eased)}${suffix}`;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+
+function initStatCounters() {
+  const stats = document.querySelectorAll(".stat__value[data-count]");
+  if (!stats.length || !("IntersectionObserver" in window) || prefersReducedMotion) {
+    return; // static values in the markup remain
+  }
+
+  const statIo = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          runCountUp(entry.target);
+          statIo.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+  stats.forEach((el) => statIo.observe(el));
+}
+
+// ---------- Scrollspy: highlight the section in view ----------
+const sectionLinks = new Map(); // section element -> [nav links]
+document.querySelectorAll('.nav__link[href^="#"]').forEach((link) => {
+  const section = document.querySelector(link.getAttribute("href"));
+  if (!section) return;
+  sectionLinks.set(section, [...(sectionLinks.get(section) || []), link]);
+});
+
+if (sectionLinks.size && "IntersectionObserver" in window) {
+  const clearSpy = () => {
+    document.querySelectorAll(".nav__link.is-active").forEach((a) => {
+      a.classList.remove("is-active");
+      a.removeAttribute("aria-current");
+    });
+  };
+
+  const spyIo = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        clearSpy();
+        (sectionLinks.get(entry.target) || []).forEach((link) => {
+          link.classList.add("is-active");
+          link.setAttribute("aria-current", "true");
+        });
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  sectionLinks.forEach((_, section) => spyIo.observe(section));
+  // Observing the hero (mapped to no link) clears the highlight when the
+  // user scrolls back to the top.
+  const hero = document.getElementById("js-hero");
+  if (hero) spyIo.observe(hero);
+}
+
+// ---------- 3D tilt on project cards (fine pointers only) ----------
+if (fine && !prefersReducedMotion) {
+  // The reveal rule transitions transform over 0.9s, which would make the
+  // tilt swim behind the pointer — override with a short inline transition
+  // while the pointer is over the card.
+  const TILT_TRANSITION =
+    "transform 0.12s ease-out, background 0.45s var(--ease), " +
+    "border-color 0.45s var(--ease), box-shadow 0.45s var(--ease)";
+
+  document.querySelectorAll(".project").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      if (card.classList.contains("is-visible")) {
+        card.style.transition = TILT_TRANSITION;
+      }
+    });
+    card.addEventListener(
+      "mousemove",
+      (e) => {
+        if (!card.classList.contains("is-visible")) return;
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${py * -3.5}deg) rotateY(${px * 3.5}deg) translateY(-4px)`;
+      },
+      { passive: true }
+    );
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+      setTimeout(() => {
+        card.style.transition = "";
+      }, 300);
+    });
+  });
+
+  // Magnetic pull on primary buttons
+  document.querySelectorAll(".btn--primary").forEach((btn) => {
+    btn.addEventListener(
+      "mousemove",
+      (e) => {
+        const rect = btn.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        btn.style.transform = `translate(${px * 8}px, ${py * 6 - 2}px)`;
+      },
+      { passive: true }
+    );
+    btn.addEventListener("mouseleave", () => {
+      btn.style.transform = "";
+    });
+  });
+}
 
 // ---------- Local time (IST) ----------
 const timeEl = document.getElementById("js-time");

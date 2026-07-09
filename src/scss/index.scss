@@ -84,6 +84,29 @@ button {
   color: #fff;
 }
 
+// Modern thin scrollbar — standard properties only: in Chromium ≥121
+// setting scrollbar-color disables ::-webkit-scrollbar styling, so a
+// webkit gradient thumb would never render there anyway.
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-faint) var(--bg-elevated);
+}
+
+// Visible keyboard focus everywhere
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+// Gradient accent word used inside headings
+.grad {
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 .container {
   width: min(1160px, 100% - 48px);
   margin-inline: auto;
@@ -196,12 +219,37 @@ button {
   transition: transform 0.45s var(--ease), border-color 0.45s var(--ease),
     background 0.45s var(--ease), box-shadow 0.45s var(--ease);
 
+  // gradient border, revealed on hover — drawn at inset 0 so it stays
+  // visible inside overflow:hidden cards (e.g. .project)
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.7),
+        rgba(244, 114, 182, 0.25) 45%, rgba(34, 211, 238, 0.7));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+  }
+
   &:hover {
     transform: translateY(-4px);
     background: var(--surface-hover);
-    border-color: var(--border-strong);
+    // fallback highlight for browsers without mask-composite, and it
+    // blends with the gradient ring elsewhere
+    border-color: rgba(139, 92, 246, 0.4);
     box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.8),
       0 0 40px -20px rgba(139, 92, 246, 0.35);
+
+    &::before {
+      opacity: 1;
+    }
   }
 }
 
@@ -513,7 +561,8 @@ button {
   color: var(--text-muted);
   transition: color 0.3s ease, background 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &.is-active {
     color: var(--text);
     background: var(--surface-hover);
   }
@@ -747,6 +796,7 @@ button {
   font-family: var(--font-display);
   font-size: clamp(26px, 3.4vw, 40px);
   font-weight: 700;
+  font-variant-numeric: tabular-nums; // no jitter during count-up
   background: var(--gradient);
   background-clip: text;
   -webkit-background-clip: text;
@@ -992,6 +1042,27 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
+}
+
+// Oversized ghost index number in the card corner
+.project__ghost {
+  position: absolute;
+  z-index: -1; // behind the card's real content
+  top: -14px;
+  right: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(84px, 9vw, 128px);
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+  user-select: none;
+  transition: -webkit-text-stroke-color 0.45s ease;
+
+  .project:hover & {
+    -webkit-text-stroke-color: rgba(139, 92, 246, 0.28);
+  }
 }
 
 .project__num {
