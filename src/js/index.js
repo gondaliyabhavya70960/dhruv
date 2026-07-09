@@ -173,19 +173,6 @@ if (fine && dot && ring && !prefersReducedMotion) {
   });
 }
 
-// ---------- Project card pointer sheen ----------
-document.querySelectorAll(".project").forEach((card) => {
-  card.addEventListener(
-    "mousemove",
-    (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-      card.style.setProperty("--my", `${e.clientY - rect.top}px`);
-    },
-    { passive: true }
-  );
-});
-
 // ---------- Copy email ----------
 const copyButton = document.getElementById("js-copy-email");
 const copyLabel = document.getElementById("js-copy-label");
@@ -285,41 +272,8 @@ if (sectionLinks.size && "IntersectionObserver" in window) {
   if (hero) spyIo.observe(hero);
 }
 
-// ---------- 3D tilt on project cards (fine pointers only) ----------
+// ---------- Magnetic pull on primary buttons (fine pointers only) ----------
 if (fine && !prefersReducedMotion) {
-  // The reveal rule transitions transform over 0.9s, which would make the
-  // tilt swim behind the pointer — override with a short inline transition
-  // while the pointer is over the card.
-  const TILT_TRANSITION =
-    "transform 0.12s ease-out, background 0.45s var(--ease), " +
-    "border-color 0.45s var(--ease), box-shadow 0.45s var(--ease)";
-
-  document.querySelectorAll(".project").forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      if (card.classList.contains("is-visible")) {
-        card.style.transition = TILT_TRANSITION;
-      }
-    });
-    card.addEventListener(
-      "mousemove",
-      (e) => {
-        if (!card.classList.contains("is-visible")) return;
-        const rect = card.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width - 0.5;
-        const py = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(900px) rotateX(${py * -3.5}deg) rotateY(${px * 3.5}deg) translateY(-4px)`;
-      },
-      { passive: true }
-    );
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "";
-      setTimeout(() => {
-        card.style.transition = "";
-      }, 300);
-    });
-  });
-
-  // Magnetic pull on primary buttons
   document.querySelectorAll(".btn--primary").forEach((btn) => {
     btn.addEventListener(
       "mousemove",
@@ -443,21 +397,6 @@ if (!prefersReducedMotion) {
         repeat: 1,
         onComplete: () => gsap.set(char, { yPercent: 0 }),
       });
-    });
-  });
-
-  // ---------- Aurora blobs: vertical parallax ----------
-  // The blobs' own drift is a CSS transform animation, so the parallax
-  // rides on the independent `translate` property (see SCSS) instead.
-  [
-    [".bg__aurora--1", "140px"],
-    [".bg__aurora--2", "-110px"],
-    [".bg__aurora--3", "90px"],
-  ].forEach(([sel, y]) => {
-    gsap.to(sel, {
-      "--par-y": y,
-      ease: "none",
-      scrollTrigger: { start: 0, end: "max", scrub: 1.2 },
     });
   });
 
